@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+accentenv/
+*.wav
+*.mp4
+*.webm
+*.ogg
+*.log
+*.cache/
+.cache/
+*.pt
+*.ckpt
