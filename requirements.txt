@@ -1,7 +1,7 @@
 streamlit
 requests
 ffmpeg-python
-openai-whisper
+openai-whisper==20231114
 torch
 torchaudio
 speechbrain
