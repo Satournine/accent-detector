@@ -36,7 +36,7 @@ def extract_audio(video_path: str) -> str:
 
 
 def transcribe_audio(audio_path: str, model_size="base"):
-    model = whisper.load_model(model_size)
+    model = whisper.load_model(model_size, device="cpu")
     result = model.transcribe(audio_path, language="en", fp16=False)
 
     return {
