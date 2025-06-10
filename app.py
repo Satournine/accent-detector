@@ -1,3 +1,12 @@
+import asyncio
+
+try:
+    asyncio.get_running_loop()
+except RuntimeError:
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+
+        
 import streamlit as st
 from accent_utils import download_video, extract_audio, transcribe_audio, classify_accent
 
