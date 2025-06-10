@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 accentenv/
 casenv/
+pretrained_models/
 *.wav
 *.mp4
 *.webm
