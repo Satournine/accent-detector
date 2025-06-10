@@ -1,8 +1,6 @@
 import os
 os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
 import asyncio
-import torch
-torch.classes.__path__ = []
 try:
     asyncio.get_running_loop()
 except RuntimeError:

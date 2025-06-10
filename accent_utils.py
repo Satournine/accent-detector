@@ -3,10 +3,7 @@ import uuid
 import requests
 import ffmpeg
 import whisper
-import torch
-import torchaudio
 from speechbrain.inference import EncoderClassifier
-torch.classes.__path__ = []
 
 MAX_DURATION = 20
 SAMPLE_RATE = 16000
@@ -40,7 +37,7 @@ def extract_audio(video_path: str) -> str:
 
 def transcribe_audio(audio_path: str, model_size="base"):
     model = whisper.load_model(model_size)
-    result = model.transcribe(audio_path, language="en")
+    result = model.transcribe(audio_path, language="en", fp16=False)
 
     return {
         "transcript": result["text"],
