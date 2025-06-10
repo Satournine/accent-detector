@@ -1,4 +1,7 @@
 import os
+os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
 os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
 import asyncio
 try:

@@ -1,10 +1,15 @@
 import os
+os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
 import uuid
 import requests
 import ffmpeg
 import whisper
 import torch
 from speechbrain.inference import EncoderClassifier
+
+os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
 
 MAX_DURATION = 20
 SAMPLE_RATE = 16000
