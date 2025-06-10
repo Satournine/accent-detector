@@ -1,7 +1,7 @@
 streamlit
 requests
 ffmpeg-python
-openai-whisper
+whisper
 torch
 torchaudio
 speechbrain
