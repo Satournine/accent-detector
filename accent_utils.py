@@ -7,7 +7,7 @@ import torch
 import torchaudio
 torchaudio.set_audio_backend("soundfile")
 from speechbrain.pretrained import EncoderClassifier
-
+torch.classes.__path__ = []
 accent_model = EncoderClassifier.from_hparams(
     source="Jzuluaga/accent-id-commonaccent_ecapa",
     savedir="pretrained_models/accent-id-commonlanguage_ecapa"
