@@ -54,13 +54,16 @@ def transcribe_audio(audio_path: str, model_size="base"):
 
 def classify_accent(audio_path: str):
     try:
+        print("Initializing SpeechBrain model...")
         torch_device = torch.device("cpu")
         accent_model = EncoderClassifier.from_hparams(
             source="Jzuluaga/accent-id-commonaccent_ecapa",
             savedir="pretrained_models/accent-id-commonlanguage_ecapa",
             run_opts={"device": torch_device}
         )
+        print("Model loaded. Classifying now...")
         out_prob, score, index, label = accent_model.classify_file(audio_path)
+        print("Classification successful.")
         return {
             "accent": label,
             "confidence": round(score.item() * 100, 2),
