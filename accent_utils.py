@@ -5,13 +5,8 @@ import ffmpeg
 import whisper
 import torch
 import torchaudio
-torchaudio.set_audio_backend("soundfile")
-from speechbrain.pretrained import EncoderClassifier
+from speechbrain.inference import EncoderClassifier
 torch.classes.__path__ = []
-accent_model = EncoderClassifier.from_hparams(
-    source="Jzuluaga/accent-id-commonaccent_ecapa",
-    savedir="pretrained_models/accent-id-commonlanguage_ecapa"
-)
 
 MAX_DURATION = 20
 SAMPLE_RATE = 16000
@@ -55,8 +50,16 @@ def transcribe_audio(audio_path: str, model_size="base"):
 
 
 def classify_accent(audio_path: str):
-    out_prob, score, index, label = accent_model.classify_file(audio_path)
-    return {
-        "accent": label,
-        "confidence": round(score.item() * 100, 2),
-            }
+    try:
+        accent_model = EncoderClassifier.from_hparams(
+            source="Jzuluaga/accent-id-commonaccent_ecapa",
+            savedir="pretrained_models/accent-id-commonlanguage_ecapa"
+        )
+        out_prob, score, index, label = accent_model.classify_file(audio_path)
+        return {
+            "accent": label,
+            "confidence": round(score.item() * 100, 2),
+        }
+    except Exception as e:
+        print("Accent classification error:", e)
+        raise
