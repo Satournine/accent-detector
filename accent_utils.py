@@ -5,13 +5,12 @@ import ffmpeg
 import whisper
 import torch
 import torchaudio
-from transformers import Wav2Vec2ForSequenceClassification, Wav2Vec2FeatureExtractor
-from speechbrain.pretrained.interfaces import foreign_class
+torchaudio.set_audio_backend("soundfile")
+from speechbrain.pretrained import EncoderClassifier
 
-accent_model = foreign_class(
-    source="Jzuluaga/accent-id-commonaccent_xlsr-en-english",
-    pymodule_file="custom_interface_local.py",
-    classname="CustomEncoderWav2vec2Classifier",
+accent_model = EncoderClassifier.from_hparams(
+    source="Jzuluaga/accent-id-commonaccent_ecapa",
+    savedir="pretrained_models/accent-id-commonlanguage_ecapa"
 )
 
 MAX_DURATION = 20
@@ -55,13 +54,9 @@ def transcribe_audio(audio_path: str, model_size="base"):
     }
 
 
-
-
 def classify_accent(audio_path: str):
     out_prob, score, index, label = accent_model.classify_file(audio_path)
     return {
         "accent": label,
-        "confidence": round(score * 100, 2),
-        "explanation": f"Predicted accent: {label} with confidence {round(score * 100, 2)}%"
-    }
-
+        "confidence": round(score.item() * 100, 2),
+            }
