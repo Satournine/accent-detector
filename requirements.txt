@@ -4,4 +4,5 @@ ffmpeg-python
 whisper
 torch
 torchaudio
-speechbrain
+speechbrain==1.0.3
+sentencepiece==0.1.99
